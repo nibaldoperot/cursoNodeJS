@@ -8,9 +8,15 @@ const posts = require('./server/routes/posts');
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // Middleware to path posts
-
 app.use('/posts', posts);
 
-app.listen(4600, (req,res)=>{
-    console.log('server running')
+//All requests are going to this function
+app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname,'dist/index.html'))
+})
+
+const port = process.env.port || 4600
+
+app.listen(port, (req,res)=>{
+    console.log('server running on port ' + port)
 })
