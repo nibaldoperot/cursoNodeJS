@@ -8,10 +8,12 @@ const PostsAPI = 'https://jsonplaceholder.typicode.com'
 
 // GET posts
 router.get('/', (req,res) => {
-    res.send('POST Works')
     // promised based
     axios.get(PostsAPI + '/posts').then(posts => {
-        console.log(posts.data)
+        res.status(200).json(posts.data)
+    })
+    .catch( error =>{
+        res.status(500)
     })
 })
 
